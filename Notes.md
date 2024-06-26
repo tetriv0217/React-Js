@@ -31,3 +31,6 @@ npx - node package executer
 
 ### However create-react-app doesnt say to make changes but these conventions should be followed and errors happen
 
+## How react elements are created 
+- Refer customReact folder
+- {} when this is used for function results and variables.This is a "Evaluated expression" i.e It should hold only the final outcome you want to make them see. 
