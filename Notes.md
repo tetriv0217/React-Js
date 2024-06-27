@@ -1,5 +1,6 @@
 # Notes 
 
+# 1. React and its definitions
 ## React and it's parts
 - React-dom :- For web Applications
 - React-native :- For mobile applications
@@ -38,7 +39,7 @@ npx - node package executer
 ## Why you dont need to inport react library always?
 - Babel injects the code itslf under the table.
 
-# Hooks
+# 2.Hooks
 ## Why the value doesn't change using js in App.jsx
 
 - This is because change in UI is handled by react,When a variable changes then all the variable change.
@@ -60,3 +61,48 @@ const [counter, setCounter] = useState(15);
 const [message, setMessage] = useState("");
 ```
 Then on buttons you can use onclick funtions and Use these variable which gets changed instantnously where used.
+
+# 3.Tailwind and props
+## Props
+Props make the component reusable
+
+## How to pass them
+The term coined can be known as props
+
+Eg1:- Your component like C
+>Card.jsx
+
+```jsx
+const Card = (props) => {
+    console.log({props});
+  return (
+    
+  );
+};
+
+export default Card;
+```
+> App.jsx
+```jsx
+import "./App.css";
+import Card from './components/Card.jsx'
+function App() {
+  return (
+    <>
+      <Card username = "Tejas" btnText = "Best" />
+    </>
+  );
+}
+export default App;
+
+```
+Now this btnText and username can be passed as values in Card.jsx and used differently
+```
+{props.username} or {props.btnText}
+```
+Instead of Text.
+
+If there is no value use this
+```
+{props.username || "Default text"}
+```
