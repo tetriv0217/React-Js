@@ -8,8 +8,8 @@
 npx - node package executer
 
 ## How to build apps
-- create-react-app {foldername}
-- npm create vite@latest (better)
+> - create-react-app {foldername}
+> - npm create vite@latest (better)
 
 ## How React works
 
@@ -34,3 +34,29 @@ npx - node package executer
 ## How react elements are created 
 - Refer customReact folder
 - {} when this is used for function results and variables.This is a "Evaluated expression" i.e It should hold only the final outcome you want to make them see. 
+
+## Why you dont need to inport react library always?
+- Babel injects the code itslf under the table.
+
+# Hooks
+## Why the value doesn't change using js in App.jsx
+
+- This is because change in UI is handled by react,When a variable changes then all the variable change.
+
+## How to use Hooks
+
+### useState
+
+Use state gives an array,[ firstValueIsVariable,Function ]
+
+> Whole syntax =>let [ variable, setVariable ] = useState()
+
+- Eg1 :-  
+```jsx
+const [counter, setCounter] = useState(15);
+ ```
+- Eg2 :- 
+```jsx 
+const [message, setMessage] = useState("");
+```
+Then on buttons you can use onclick funtions and Use these variable which gets changed instantnously where used.
