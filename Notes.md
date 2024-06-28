@@ -62,6 +62,38 @@ const [message, setMessage] = useState("");
 ```
 Then on buttons you can use onclick funtions and Use these variable which gets changed instantnously where used.
 
+## Question on counter (IMPORTANT)
+
+>setCounter returns a callback fucntion
+```jsx
+const [counter, setCounter] = useState(15);
+const addValue = () => {
+    // console.log("add value",Math.random());
+    // counter = counter + 1;
+    if (counter > 19) {
+      setMessage("Value above 20");
+      console.log(`Value Cant be updated`);
+    } else {
+      setCounter(counter + 1);
+      setCounter(counter + 1);
+      setCounter(counter + 1);
+      setCounter(counter + 1);
+      setMessage("");
+    }
+    console.log("clicked", counter);
+  };
+```
+**This code will no will not increment 4 time asit is send in batches and it ends up increaseing the same value 15**
+
+>How to make this work
+```jsx
+setCounter((prevCounter) => prevCounter+1);
+setCounter((prevCounter) => prevCounter+1);
+setCounter((prevCounter) => prevCounter+1);
+setCounter((prevCounter) => prevCounter+1);
+```
+*Howerver not a good Practise*
+
 # 3.Tailwind and props
 ## Props
 Props make the component reusable

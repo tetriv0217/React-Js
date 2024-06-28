@@ -11,11 +11,14 @@ function App() {
   const addValue = () => {
     // console.log("add value",Math.random());
     // counter = counter + 1;
-    if (counter > 19) {
+    if (counter+4 > 21) {
       setMessage("Value above 20");
       console.log(`Value Cant be updated`);
     } else {
-      setCounter(counter + 1);
+      setCounter((prevCounter) => prevCounter+1);
+      setCounter((prevCounter) => prevCounter+1);
+      setCounter((prevCounter) => prevCounter+1);
+      setCounter((prevCounter) => prevCounter+1);
       setMessage("");
     }
     console.log("clicked", counter);
