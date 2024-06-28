@@ -11,7 +11,7 @@ npx - node package executer
 ## How to build apps
 > - create-react-app {foldername}
 > - npm create vite@latest (better)
-
+- // 'no-unused-variable' : [true, {"ignore-pattern": "^_"}], add this in .eslintrc.cls
 ## How React works
 
 ### In create-react-app  
