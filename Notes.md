@@ -138,3 +138,15 @@ If there is no value use this
 ```
 {props.username || "Default text"}
 ```
+
+
+# 4. BgColor Project important points
+- Remove Import css file tailwind will work abruptly
+- The on click method in React expects a function reference
+You can't directly pass parameters inside the function, instead, you need to pass it as a reference or use arrow function syntax
+
+```jsx 
+onClick={()=>{setColor("black")}} 
+```
+
+- This lets you help to pass parameters
