@@ -150,3 +150,64 @@ onClick={()=>{setColor("black")}}
 ```
 
 - This lets you help to pass parameters
+
+## 5.Takeaways from Password Generator
+
+**useEffect Hook**
+
+**Purpose**: The useEffect hook allows you to perform side effects in function components.
+
+**Usage:**
+1. Accepts a function that contains the side-effect logic.
+2. Optionally accepts a dependency array to re-run the effect when certain values change.
+
+```jsx
+
+useEffect(() => {
+  // side-effect logic
+}, [dependency1, dependency2]);
+
+```
+**useCallback Hook**
+
+**Purpose**: The useCallback hook returns a memoized version of the callback function that only changes if one of the dependencies has changed.
+
+**Usage:**
+1. Useful to prevent unnecessary re-renders by ensuring functions are not re-created on every render.
+2. Accepts a function and a dependency array.
+
+```jsx
+import { useCallback, useState, useEffect, useRef } from "react";
+const memoizedCallback = useCallback(() => {
+  // callback logic
+}, [dependency1, dependency2]);
+```
+**useRef Hook**
+
+**Purpose**:  The useRef hook returns a mutable ref object whose .current property is initialized to the passed argument. This object persists for the full lifetime of the component.
+
+**Usage:**
+1. Useful for accessing and manipulating DOM elements directly.
+2. Can also hold a mutable value that does not cause a re-render when updated.
+
+```jsx
+import { useCallback, useState, useEffect, useRef } from "react";
+const myRef = useRef(null);
+```
+**Copy to Clipboard**
+
+**Purpose**:  To copy text programmatically to the clipboard using the browser's Clipboard AP
+
+**Usage:**
+1. Use window.navigator.clipboard.writeText to copy a given text to the clipboard.
+2. Ensure you select and set the selection range on the input element if required.
+
+```jsx
+import { useCallback, useState, useEffect, useRef } from "react";
+const copyToClipboard = useCallback(() => {
+  inputRef.current?.select();
+  inputRef.current?.setSelectionRange(0, 99999); // for mobile devices
+  window.navigator.clipboard.writeText(text);
+}, [text]);
+
+```
