@@ -151,7 +151,7 @@ onClick={()=>{setColor("black")}}
 
 - This lets you help to pass parameters
 
-## 5.Takeaways from Password Generator
+# 5.Takeaways from Password Generator
 
 **useEffect Hook**
 
@@ -212,7 +212,7 @@ const copyToClipboard = useCallback(() => {
 
 ```
 
-## 6. TakeAways from currencyChanger Project
+# 6. TakeAways from currencyChanger Project
 
 ## Custom Hooks
 
@@ -254,3 +254,184 @@ function useCurrencyInfo(currency) {
 export default useCurrencyInfo;
 
 ```
+
+
+# Take aways from 07react-router-dom
+Let's break down the key learning points from each of these files: `GitHub.jsx`, `Layout.jsx`, and `main.jsx`.
+
+### GitHub.jsx
+1. **Data Loading with `useLoaderData`**:
+   - You’re using `useLoaderData` to fetch data when the route is loaded, which is an efficient way to handle data fetching in React Router.
+
+2. **Component Structure**:
+   - The `GitHub` component is using the fetched data (`data`) to display the number of followers and an avatar image from GitHub.
+
+3. **Commented Code for Fetching Data**:
+   - You have a commented-out section that demonstrates how to fetch data within a component using `useEffect` and `useState`. This is useful for understanding both client-side data fetching and server-side data loading.
+
+    ```jsx
+    import { useEffect, useState } from "react"
+    import { useLoaderData } from "react-router-dom";
+    export default function GitHub() {
+        const data = useLoaderData();
+        // const [data, setData] = useState([]);
+        // useEffect(() => {
+        //     fetch('https://api.github.com/users/tetriv0217')
+        //     .then(res => res.json())
+        //     .then(data =>{
+        //         console.log(data);
+        //         setData(data)
+        //     })
+        // }, [])
+        return (
+            <>
+            <div className="text-center m-4 h-170 bg-gray-600 text-white p-4 text-3xl flex items-center justify-center ">
+                Github Followers: {data.followers}
+                <img className="object-contain" src={data.avatar_url} alt="Git Picture" width={170} height={170} />
+            </div>
+            </>
+        );
+    }
+
+    export const githubInfoLoader = async() =>{
+        const res = await fetch('https://api.github.com/users/tetriv0217')
+        return res.json()
+    ```
+
+### Layout.jsx
+1. **Layout Component**:
+   - The `Layout` component is a typical layout component that includes a `Header` and a `Footer`, with an `Outlet` for rendering child routes.
+   - This demonstrates how to use layout components to encapsulate common page structure and styling.
+
+  ```jsx
+  import React from 'react'
+  import Header from './components/Header/Header'
+  import Footer from './components/Footer/Footer'
+  import { Outlet } from 'react-router-dom'
+
+  const Layout = () => {
+    return (
+      <>
+          <Header/>
+          <Outlet/>
+          <Footer/>
+          
+      </>
+    )
+  }
+
+  export default Layout
+  ```
+### main.jsx
+1. **React Router Setup**:
+   - You've set up React Router using `createBrowserRouter` and `createRoutesFromElements`.
+   - The routes are defined within a parent route (`/`) that uses the `Layout` component to wrap all the child routes.
+
+2. **Child Routes**:
+   - Child routes are defined for `Home`, `About`, `Contact`, `GitHub`, and `User`.
+   - For the `GitHub` route, you've specified a `loader` to fetch data from the GitHub API before rendering the component.
+```jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+import "./index.css";
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import Layout from "./Layout";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
+import Contact from "./components/Contact/Contact";
+import Github, {githubInfoLoader} from "./components/Github/Github"
+import User from "./components/User/User";
+
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <Layout />,
+//     children: [
+//       { 
+//         path: "",
+//         element:<Home/>
+//       },
+//       { 
+//         path: "about",
+//         element:<About/>
+//       },
+//       { 
+//         path: "contact",
+//         element:<Contact />
+//       },
+//       { 
+//         path: "github",
+//         element:<Github/>
+//       },
+      
+//     ],
+//   },
+// ]);
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element = {<Layout />}>
+      <Route path="" element = {<Home />}/>
+      <Route path="about" element = {<About />}/>
+      <Route path="contact" element = {<Contact />}/>
+      <Route path="github" 
+      loader = {githubInfoLoader}
+      element = {<Github />}/>
+      <Route path="user/:userid" element = {<User />}/>
+      
+      
+    </Route>
+  )
+)
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
+
+
+```
+### User.jsx
+
+1. **Importing Necessary Modules**:
+   - `useParams` is imported from `react-router-dom`. This hook allows you to access the parameters defined in the route path.
+
+2. **Using `useParams` to Get Route Parameters**:
+   - The `User` component calls `useParams()` to get the route parameter `userid`.
+   - `const { userid } = useParams()` destructures the `userid` parameter from the object returned by `useParams`.
+
+3. **Displaying the User ID**:
+   - The component returns a `div` that displays the `userid` in a styled format.
+
+Here’s the complete `User.jsx` component:
+
+```jsx
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const User = () => {
+  const { userid } = useParams();
+  return (
+    <div className='bg-green-500 text-white text-3xl text-center p-4'>
+      User: {userid}
+    </div>
+  );
+};
+
+export default User;
+```
+
+### Summary
+
+1. **useParams Hook**:
+   - The `useParams` hook is used to access URL parameters in a functional component. It returns an object of key/value pairs of the dynamic params from the current URL.
+
+2. **Component Usage**:
+   - The `User` component demonstrates how to dynamically display content based on the URL parameter.
+
+3. **Styling**:
+   - Inline Tailwind CSS classes are used to style the component, making it easy to apply styles directly in the JSX.
+
+This component is now ready to be used with a route that includes a dynamic `userid` parameter, like `/user/:userid`. If you have further questions or need more details, feel free to ask!
