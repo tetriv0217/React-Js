@@ -1,15 +1,39 @@
-import { useState } from 'react'
-import conf from './conf/conf';
-import './App.css'
+import "./App.css";
+import { useDispatch } from "react-redux";
+import authService from "./appwrite/auth";
+import React,{ useEffect,useState } from "react";
+import { login, logout } from "./store/authSlice";
+import { Footer, Header } from "./components";
+import { Outlet } from "react-router-dom";
 
 function App() {
-
-  console.log(conf.appwriteUrl);
-  return (
-    <>
-      tEJAS IS THE BEST
-    </>
-  )
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    authService
+      .getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+          console.log("logged in");
+        } else {
+          dispatch(logout());
+          console.log("logged out");
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
+  return !loading ? (
+    <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
+      <div className="w-full block" >
+        <Header/>
+        <main>
+          TODO:<Outlet/>
+        </main>
+        <Footer/>
+      </div>
+    </div>
+  ) : null;
 }
 
-export default App
+export default App;
