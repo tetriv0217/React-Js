@@ -10,7 +10,7 @@ function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const [register, handleSubmit] = useForm();
+  const {register, handleSubmit} = useForm();
 
   const create = async (data) => {
     setError("");
@@ -25,11 +25,10 @@ function Signup() {
       setError(error.message);
     }
   };
+
   return (
     <div className="flex items-center justify-center">
-      <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
-      >
+      <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
             <Logo width="100%" />
@@ -53,7 +52,6 @@ function Signup() {
           <div className="space-y-5">
             <Input
               placeholder="Enter Full Name"
-              type="text"
               label="Full Name:"
               {...register("name", {
                 required: true,
@@ -73,9 +71,9 @@ function Signup() {
               })}
             />
             <Input
-              placeholder="Enter Password"
-              type="password"
               label="Password:"
+              type="password"
+              placeholder="Enter Password"
               {...register("password", {
                 required: true,
                 
